@@ -1,61 +1,61 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-
+  "title": "Solar Electricity Consumption per Continent",
   "description": "Stacked Chart on solar_electricity",
   "data": {
     "url": "https://raw.githubusercontent.com/Etan01/FIT3179Assignment2/main/data/electricty_clean.csv"
   },
-  "vconcat":[
+  "vconcat": [
+    {"layer":[
     {
-    "width": 500,
-    "height": 400,
-    "transform": [
-    {"filter": {"field": "year",
-          "timeUnit": "year",
-          "range": [2000, 2020]}},
-    {"filter": {"param": "click"}}
-  ],
-  "mark": "area",
-  "encoding": {
-    "x": {"timeUnit": "year", "field": "year",
-    "axis":{"domain": false, "format": "%Y", "tickSize": 0}
-    },
-    "y": {
-      "aggregate": "sum", "field": "solar_electricity",
-      "axis": null,
-      "stack": "zero"
-      },
-      "color": {
-        "field": "continent",
-        "type": "nominal"
+      "width": 500,
+      "height": 400,
+      "transform": [
+        {
+          "filter": {"field": "year", "timeUnit": "year", "range": [2000, 2020]}
         },
-      "tooltip":[
-          {"field": "continent", "type": "ordinal"}
-        ]
-  }
-  },
-  {
-    "encoding": {
-      "color":{
-        "condition":{
-          "param": "click",
-          "field": "continent",
-          "scale": {
-            "domain": ["Asia", "Americas", "Africa", "Oceania", "Europe"],
-            "range": ["#e7ba52", "#a7a7a7", "#aec7e8", "#1f77b4", "#9467bd"]
-        }
+        {"filter": {"param": "click"}}
+      ],
+      "mark": "area",
+      "encoding": {
+        "x": {
+          "timeUnit": "year",
+          "field": "year",
+          "title": "Year (2000-2016)",
+          "axis": {"domain": false, "format": "%Y", "tickSize": 0}
+        },
+        "y": {
+          "aggregate": "sum",
+          "field": "solar_electricity",
+          "title": "Solar Electricity",
+          "stack": "zero"
+        },
+        "color": {"field": "continent", "type": "nominal"},
+        "tooltip": [{"field": "continent", "type": "ordinal"}]
+      }
+    }
+    ]},
+    {
+      "encoding": {
+        "color": {
+          "condition": {
+            "param": "click",
+            "field": "continent",
+            "scale": {
+              "domain": ["Asia", "Americas", "Africa", "Oceania", "Europe"],
+              "range": ["#e7ba52", "#a7a7a7", "#aec7e8", "#1f77b4", "#9467bd"]
+            }
+          },
+          "value": "lightgray"
+        },
+        "x": {"aggregate": "count"},
+        "y": {"title": "Continent", "field": "continent"}
       },
-      "value": "lightgray"
-    },
-    "x": {"aggregate": "count"},
-    "y": {"title": "Continent", "field": "continent"}
-  },
-  "width": 600,
-    "mark": "bar",
-    "params": [{
-      "name": "click",
-      "select": {"type": "point", "encodings": ["color"]}
-    }]
-  }
+      "width": 600,
+      "mark": "bar",
+      "params": [
+        {"name": "click", "select": {"type": "point", "encodings": ["color"]}}
+      ]
+    }
   ]
 }
