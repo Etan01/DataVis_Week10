@@ -16,10 +16,11 @@ body{
 .homepage{
 	margin: 30px;
 	padding: 30px;
-	text-align: center;
+	background-color: #DBE1F1;
 }
 
 .title{
 	font-size: 30px;
 	padding: 60px;
+	text-align: center;
 }
